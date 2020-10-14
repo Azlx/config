@@ -1,0 +1,387 @@
+"        _         _      ____  
+"       / \    ___| |_  _| ___| 
+"      / _ \  |_  / \ \/ /___ \ 
+"     / ___ \  / /| |>  < ___) |
+"    /_/   \_\/___|_/_/\_\____/ 
+
+
+" 块标题注释模板
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+" ╔═════════════════════╗
+" ║         xxxxx       ║
+" ╚═════════════════════╝
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+
+
+" 使 vimrc 文件立马生效
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
+" 设置 leader
+let mapleader=","
+
+
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+" ╔═════════════════════╗
+" ║       基础设置      ║
+" ╚═════════════════════╝
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+
+" 取消vi一致性模式
+set nocompatible
+
+" 不创建交换文件
+set noswapfile
+
+" 不创建备份文件
+set nobackup
+
+" 保存撤销历史
+set undofile
+
+" 设置退格键模式
+set backspace=indent,eol,start
+
+"允许空格键和光标键跨越行边界
+set whichwrap+=<,>,h,l
+
+" 打开英语单词拼写检查
+" set spell spelllang=en_us
+
+" 开启行号
+set number
+
+" 显示相对行号
+set relativenumber
+
+" 启用鼠标
+set mouse=a
+set selection=exclusive
+set selectmode=mouse,key
+
+" 显示括号匹配
+set showmatch
+
+" 高亮匹配结果
+set hlsearch
+
+" 开启实时搜索
+set incsearch
+
+" 开启大小写不敏感
+set ignorecase
+
+" 设置缩进
+set tabstop=4      " 设置Tab长度为4
+set shiftwidth=4   " 设置自动缩进长度为4
+set autoindent     " 自动缩进 
+set expandtab      " 自动将Tab转化为空格
+set softtabstop=4  " Tab转换为4个空格
+        
+" 设置编码
+set encoding=utf-8  
+set termencoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,gbk,gb2312,cp936
+
+" 设置原格式粘贴
+set paste
+
+" 显示光标当前位置
+set ruler
+" set rulerformat=%20(%2*%<%f%=\ %m%r\ %3l\ %c\ %p%%%)
+
+" 开启vim自身命令行模式智能补全
+set wildmenu
+
+" 光标移动到buffer的顶部和底部时保持5行距离
+set scrolloff=5
+
+" 设置历史记录数
+set history=500
+
+" 当文件在外部被修改时，自动更新该文件
+set autoread
+
+
+
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+" ╔═════════════════════╗
+" ║       颜色设置      ║
+" ╚═════════════════════╝
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+" -----> 使用了 vim-colorschemes 主题插件，已不需要 <-----
+
+" 高亮显示当前行
+set cursorline
+" 高亮显示当前行颜色设置：背景色为240,前景色为默认；(需要开启高亮当前行)
+" highlight CursorLine   cterm=NONE ctermbg=240 ctermfg=NONE
+
+" 高亮显示当前列
+" set cursorcolumn
+" 高亮显示当前列颜色设置：背景色为240，前景色为默认；(需要开启高亮当前列)
+" highlight CursorColumn cterm=NONE ctermbg=240 ctermfg=NONE
+
+" 显示80字符分割线 
+set colorcolumn=81
+" 80 字符分割线颜色设置：背景色为243，前景色默认；(需要开启80字符分割线)
+" highlight ColorColumn cterm=NONE ctermbg=243 ctermfg=NONE
+
+
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+" ╔═════════════════════╗
+" ║       其它设置      ║
+" ╚═════════════════════╝
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+" 自动回到上次编辑的位置
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+
+" 语法高亮
+syntax on
+
+" 打开文件类型检测
+" https://vimjc.com/vim-filetype.html
+filetype plugin indent on
+
+
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+" ╔═════════════════════╗
+" ║         插件        ║
+" ╚═════════════════════╝
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+call plug#begin('~/.vim/plugged')
+
+" ftz: 命令行模糊查找器
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" vim-airline: 状态栏美化
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Git
+Plug 'tpope/vim-fugitive'
+
+" 树形窗口
+Plug 'preservim/nerdtree'
+
+" 树形窗口支持 git 插件
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" 文件图标
+Plug 'ryanoasis/vim-devicons'
+
+" 主题配色
+Plug 'flazz/vim-colorschemes'
+
+" 自动提示: YCM
+" Plug 'ycm-core/YouCompleteMe'
+
+" 启动界面美化
+Plug 'mhinz/vim-startify'
+
+" 显示单词下划线
+Plug 'itchyny/vim-cursorword'
+
+" 高亮单词
+Plug 'lfv89/vim-interestingwords'
+
+" 书签标记
+Plug 'MattesGroeger/vim-bookmarks'
+
+call plug#end()
+
+
+" 设置主题(vim-colorscheme插件)
+colorscheme molokai
+
+
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+" ╔═════════════════════╗
+" ║        Python       ║
+" ╚═════════════════════╝
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+" " 自动补全配置
+" set completeopt=longest,menu "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+" autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
+" " inoremap <expr> <CR> pumvisible() ? '\<C-y>' : '\<CR>' "回车即选中当前项
+" 
+" "上下左右键的行为 会显示其他信息
+" inoremap <expr> <Down> pumvisible() ? '\<C-n>' : '\<Down>'
+" inoremap <expr> <Up> pumvisible() ? '\<C-p>' : '\<Up>'
+" inoremap <expr> <PageDown> pumvisible() ? '\<PageDown>\<C-p>\<C-n>' : '\<PageDown>'
+" inoremap <expr> <PageUp> pumvisible() ? '\<PageUp>\<C-p>\<C-n>' : '\<PageUp>'
+"  
+" "youcompleteme 默认tab s-tab 和自动补全冲突
+" "let g:ycm_key_list_select_completion=['<c-n>']
+" let g:ycm_key_list_select_completion = ['<Down>']
+" "let g:ycm_key_list_previous_completion=['<c-p>']
+" let g:ycm_key_list_previous_completion = ['<Up>']
+" let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
+" 
+" let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
+" let g:ycm_min_num_of_chars_for_completion=2 " 从第2个键入字符就开始罗列匹配项
+" let g:ycm_cache_omnifunc=0 " 禁止缓存匹配项,每次都重新生成匹配项
+" let g:ycm_seed_identifiers_with_syntax=1 " 语法关键字补全
+" nnoremap <F5> :YcmForceCompileAndDiagnostics<CR> "force recomile with syntastic
+" "nnoremap <leader>lo :lopen<CR> "open locationlist
+" "nnoremap <leader>lc :lclose<CR> "close locationlist
+" inoremap <leader><leader> <C-x><C-o>
+" "在注释输入中也能补全
+" let g:ycm_complete_in_comments = 1
+" "在字符串输入中也能补全
+" let g:ycm_complete_in_strings = 1
+" "注释和字符串中的文字也会被收入补全
+" let g:ycm_collect_identifiers_from_comments_and_strings = 0
+"  
+" nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " 跳转到定义处
+
+
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+" ╔═════════════════════╗
+" ║       airline       ║
+" ╚═════════════════════╝
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+" 显示256色
+set t_Co=256
+
+" 总是显示状态栏
+set laststatus=2
+
+" 设置 powerline fonts
+let g:airline_powerline_fonts = 1
+
+" 选择主题
+let g:airline_theme='bubblegum'
+
+" 显示tab和buffe 
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#left_sep = ' '      " tabline中当前buffer两端的分隔字符
+let g:airline#extensions#tabline#left_alt_sep = '|'  " tabline中未激活buffer两端的分隔字符
+let g:airline#extensions#tabline#buffer_nr_show = 1  " tabline中buffer显示编号
+" let g:airline#extensions#tabline#formatter = 'default'  "formater
+
+" 设置左右符号
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '▶'
+let g:airline_left_alt_sep = '❯'
+let g:airline_right_sep = '◀'
+let g:airline_right_alt_sep = '❮'
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ' '
+let g:airline_symbols.linenr = ' ☰ '
+let g:airline_symbols.maxlinenr = ' '
+let g:airline_symbols.dirty='⚡'
+
+
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+" ╔═════════════════════╗
+" ║       NERDTree      ║
+" ╚═════════════════════╝
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+autocmd StdinReadPre * let s:std_in=1
+
+" 自动打开树形窗口
+" autocmd vimenter * NERDTree
+
+" 单独打开vim时，自动打开树形窗口
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | NERDTree | endif
+
+" 使用vim打开一个目录时，自动打开树形窗口
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+
+" 当NERDTree为剩下的唯一窗口时自动关闭
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" 关闭NERDTree快捷键
+map <leader>t :NERDTreeToggle<CR>
+
+" 修改树的显示图标
+let g:NERDTreeDirArrowExpandable = '►'
+let g:NERDTreeDirArrowCollapsible = '▼'
+
+let NERDTreeAutoCenter=1
+
+" 显示行号
+" let NERDTreeShowLineNumbers=1
+
+" 是否显示隐藏文件
+let NERDTreeShowHidden=1
+
+" 设置宽度
+" let NERDTreeWinSize=35
+
+" 在终端启动vim时，共享NERDTree
+let g:nerdtree_tabs_open_on_console_startup=1
+
+" 忽略一下文件的显示
+let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+
+" 自定义文件 git 状态图标
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+
+" 使用 NerdFonts
+let g:NERDTreeGitStatusUseNerdFonts = 1
+
+" 显示文件状态
+let g:NERDTreeGitStatusShowClean = 1
+
+
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+" ╔═════════════════════╗
+" ║       键位映射      ║
+" ╚═════════════════════╝
+" ☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+" 快速到行尾和行首
+nmap H ^
+nmap L $
+
+" 快速跳转
+nmap J 5j
+nmap K 5k
+
+" 跳转window
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" 映射是否显示隐藏字符快捷键
+nmap <Leader>sl :set list!<CR>
+
+" 处理复制粘贴
+vnoremap <Leader>y "+y
+nmap <Leader>p "+p
+
+
+" 映射保存、退出文件
+nmap <Leader>w :w<CR>
+nmap <Leader>q :q!<CR>
+
+" 清除当前搜索内容高亮
+noremap <Leader><space> :nohlsearch<CR>
+
+" 多行注释
+noremap <Leader># I# <ESC>
+
+" fzf 快捷键映射
+nmap <silent> <Leader>c :Color<CR>
+nmap <silent> <Leader>b :Buffers<CR>
+nmap <silent> <Leader>f :Files<CR>
+nmap <silent> <Leader>l :Lines<CR>
+
+" 插入 ASCII 艺术字 
+noremap tx :r !figlet 
